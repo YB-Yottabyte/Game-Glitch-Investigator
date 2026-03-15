@@ -178,10 +178,10 @@ Added comprehensive docstrings to all functions in `logic_utils.py`:
 
 Added player-friendly features:
 
-- **"Hot/Cold" proximity indicator** - Shows how many points away each guess is
-- **Color-coded feedback** - Uses Streamlit st.success/st.warning for visual clarity
-- **Summary table** - Displays all guesses with distances and feedback in formatted table
-- **Game statistics** - Shows win rate, average guesses needed
+- "Hot/Cold" proximity indicator: Shows how many points away each guess is
+- Color-coded feedback: Uses Streamlit st.success/st.warning for visual clarity
+- Summary table: Displays all guesses with distances and feedback in formatted table
+- Game statistics: Shows win rate, average guesses needed
 
 ### Challenge 5: AI Model Comparison
 
