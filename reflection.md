@@ -1,4 +1,4 @@
-# 🔍 Debugging Reflection & AI Collaboration Log
+# Debugging Reflection & AI Collaboration Log
 
 As you work through this project, use this file to document your debugging process, how you used Copilot, and what you learned about working with AI-generated code.
 
@@ -9,24 +9,24 @@ As you work through this project, use this file to document your debugging proce
 ### 1. What was broken when you started?
 
 Document the three bugs you found. For each bug, describe:
-- **What you expected to happen**
-- **What actually happened**
-- **Where in the code you think the bug is**
+- What you expected to happen
+- What actually happened
+- Where in the code you think the bug is
 
 #### Bug #1: High/Low Hints Are Backwards
-- **Expected:** When my guess (60) is higher than the secret (50), I should see "Too High"
-- **Actual:** The game displays "Too Low" when I guess a number higher than the secret
-- **Location (file and function):** `logic_utils.py` in the `check_guess()` function, lines 40-48. The if/else logic for comparing guess > secret returns the wrong message
+- Expected:When my guess (60) is higher than the secret (50), I should see "Too High"
+- Actual: The game displays "Too Low" when I guess a number higher than the secret
+- Location: `logic_utils.py` in the `check_guess()` function, lines 40-48. The if/else logic for comparing guess > secret returns the wrong message
 
 #### Bug #2: Game Doesn't Enforce Max Guesses
-- **Expected:** After 10 guesses, the game should stop accepting new guesses and show "Game Over"
-- **Actual:** I can keep guessing past 10 guesses. The "Guesses Remaining" counter goes negative, and the game still accepts input
-- **Location (file and function):** `app.py` in the `main()` function. The check `if game['guesses_made'] >= game['max_guesses']` exists but doesn't properly prevent further input submission
+- Expected: After 10 guesses, the game should stop accepting new guesses and show "Game Over"
+- Actual: I can keep guessing past 10 guesses. The "Guesses Remaining" counter goes negative, and the game still accepts input
+- Location: `app.py` in the `main()` function. The check `if game['guesses_made'] >= game['max_guesses']` exists but doesn't properly prevent further input submission
 
 #### Bug #3: Score Calculation Ignores Hints
-- **Expected:** My score should decrease for EACH HINT I receive, not just for each guess. Getting hints quickly should be rewarded
-- **Actual:** Score = 100 - (guesses_made * 10). The calculation only counts guesses, so the score doesn't reflect how many hints I needed before guessing correctly
-- **Location (file and function):** `app.py` in the `main()` function, around line 50. The score formula doesn't track the number of hints given 
+- Expected: My score should decrease for EACH HINT I receive, not just for each guess. Getting hints quickly should be rewarded
+- Actual: Score = 100 - (guesses_made * 10). The calculation only counts guesses, so the score doesn't reflect how many hints I needed before guessing correctly
+- Location: `app.py` in the `main()` function, around line 50. The score formula doesn't track the number of hints given 
 
 ---
 
@@ -36,45 +36,45 @@ Document the three bugs you found. For each bug, describe:
 
 Describe two examples:
 
-#### ✅ Example of CORRECT AI Suggestion
-- **What you asked Copilot:** "The high/low hints in check_guess() are backwards. When guess > secret, it should return 'Too High' but currently returns 'Too Low'. How do I fix this?"
-- **What it suggested:** Swap the return statements in the if/else branch. When `guess > secret`, return "Too High". When `guess < secret`, return "Too Low".
-- **Was it correct?** Yes
-- **How you verified it:** Added 5 unit tests covering correct guess, too high, too low, and boundary conditions (1 and 100). All tests passed.
-- **Why did it work?** The suggestion was straightforward logic reversal. By comparing the actual behavior to expected behavior using test cases, I confirmed the fix was correct.
+#### Example of CORRECT AI Suggestion
+- What you asked Copilot: "The high/low hints in check_guess() are backwards. When guess > secret, it should return 'Too High' but currently returns 'Too Low'. How do I fix this?"
+- What it suggested: Swap the return statements in the if/else branch. When `guess > secret`, return "Too High". When `guess < secret`, return "Too Low".
+- Was it correct? Yes
+- How you verified it: Added 5 unit tests covering correct guess, too high, too low, and boundary conditions (1 and 100). All tests passed.
+- Why did it work? The suggestion was straightforward logic reversal. By comparing the actual behavior to expected behavior using test cases, I confirmed the fix was correct.
 
-#### ❌ Example of INCORRECT/MISLEADING AI Suggestion
-- **What you asked Copilot:** "My game doesn't enforce the 10-guess limit. Players can keep guessing past 10. How do I fix this?"
-- **What it suggested:** "Just check if guesses_made >= max_guesses after incrementing, and set game_over = True."
-- **Was it correct?** Partially, but incomplete
-- **What was wrong?** While setting game_over = True worked, the UI didn't prevent the button from being pressed again. Players could still submit more guesses after hitting the limit because the button state wasn't being managed.
-- **How did you catch the error?** When I ran the game, I could keep clicking "Submit Guess" even after the loss message appeared. I realized the UI needed to disable the button when game_over = True.
-- **What you did instead:** Added `submit_disabled = game['game_over']` and passed `disabled=submit_disabled` to the button widget. This prevents any new guesses from being processed once the game ends.
+#### Example of INCORRECT/MISLEADING AI Suggestion
+- What you asked Copilot: "My game doesn't enforce the 10-guess limit. Players can keep guessing past 10. How do I fix this?"
+- What it suggested: "Just check if guesses_made >= max_guesses after incrementing, and set game_over = True."
+- Was it correct? Partially, but incomplete
+- What was wrong? While setting game_over = True worked, the UI didn't prevent the button from being pressed again. Players could still submit more guesses after hitting the limit because the button state wasn't being managed.
+- How did you catch the error? When I ran the game, I could keep clicking "Submit Guess" even after the loss message appeared. I realized the UI needed to disable the button when game_over = True.
+- What you did instead: Added `submit_disabled = game['game_over']` and passed `disabled=submit_disabled` to the button widget. This prevents any new guesses from being processed once the game ends.
 
 ### 3. Debugging and testing your fixes
 
 For each bug you fixed, document:
 
 #### Fix #1: High/Low Hints Reversed
-- **The problem:** The check_guess() function returned "Too Low" when guess > secret, and "Too High" when guess < secret. Logic was backwards.
-- **Copilot's explanation:** "This looks like a simple if/else reversal. You're comparing guess to secret, but the return messages don't match the conditions."
-- **The fix I made:** Swapped the return statements. Now `guess > secret` returns "Too High" and `guess < secret` returns "Too Low".
-- **Test case I wrote:** Added TestCheckGuess class with 5 tests covering all cases (correct, too high, too low, boundary values)
-- **Test passed?** ✓ Yes - All 5 tests pass
+- The problem: The check_guess() function returned "Too Low" when guess > secret, and "Too High" when guess < secret. Logic was backwards.
+- Copilot's explanation: "This looks like a simple if/else reversal. You're comparing guess to secret, but the return messages don't match the conditions."
+- The fix I made: Swapped the return statements. Now `guess > secret` returns "Too High" and `guess < secret` returns "Too Low".
+- Test case I wrote: Added TestCheckGuess class with 5 tests covering all cases (correct, too high, too low, boundary values)
+- Test passed? ✓ Yes - All 5 tests pass
 
 #### Fix #2: Game Never Ends
-- **The problem:** After reaching 10 guesses, the game displayed "Game Over" message but still accepted new guesses. The button wasn't disabled, allowing infinite guesses.
-- **Copilot's explanation:** "You're checking max_guesses, but the UI component (st.button) still allows clicks. You need to disable the button when game_over is True."
-- **The fix I made:** (1) Check max_guesses BEFORE incrementing. (2) Disable the button with `disabled=game['game_over']`. (3) Add explicit check at start of button handler to prevent processing if game already over.
-- **Test case I wrote:** Added TestGameSession class to verify game_starts_at_zero_guesses and max_guesses=10 are correctly initialized.
-- **Test passed?** ✓ Yes - Both tests pass; game properly enforces 10-guess limit
+- The problem: After reaching 10 guesses, the game displayed "Game Over" message but still accepted new guesses. The button wasn't disabled, allowing infinite guesses.
+- Copilot's explanation: "You're checking max_guesses, but the UI component (st.button) still allows clicks. You need to disable the button when game_over is True."
+- The fix I made: (1) Check max_guesses BEFORE incrementing. (2) Disable the button with `disabled=game['game_over']`. (3) Add explicit check at start of button handler to prevent processing if game already over.
+- Test case I wrote: Added TestGameSession class to verify game_starts_at_zero_guesses and max_guesses=10 are correctly initialized.
+- Test passed? ✓ Yes - Both tests pass; game properly enforces 10-guess limit
 
 #### Fix #3: Score Calculation Wrong
-- **The problem:** Score only subtracted `guesses_made * 10`, ignoring hints. Players should be penalized for requesting hints.
-- **Copilot's explanation:** "Right now you're only counting guesses. You need to track how many hints the player received (each 'Too High' or 'Too Low' is a hint) and apply a penalty."
-- **The fix I made:** Changed formula to `100 - (guesses_made * 10) - (hints_received * 5)`. Count hints as len(feedback_history) - 1 (excluding the final "Correct!" message). Clamp score to minimum of 0.
-- **Test case I wrote:** Added TestScoreCalculation class with 3 tests: perfect game (score=90), game with hints (score=30), exhausted guesses (score=0).
-- **Test passed?** ✓ Yes - All 3 score tests validate the calculation logic
+- The problem: Score only subtracted `guesses_made * 10`, ignoring hints. Players should be penalized for requesting hints.
+- Copilot's explanation: "Right now you're only counting guesses. You need to track how many hints the player received (each 'Too High' or 'Too Low' is a hint) and apply a penalty."
+- The fix I made: Changed formula to `100 - (guesses_made * 10) - (hints_received * 5)`. Count hints as len(feedback_history) - 1 (excluding the final "Correct!" message). Clamp score to minimum of 0.
+- Test case I wrote: Added TestScoreCalculation class with 3 tests: perfect game (score=90), game with hints (score=30), exhausted guesses (score=0).
+- Test passed? ✓ Yes - All 3 score tests validate the calculation logic
 
 ---
 
@@ -87,11 +87,11 @@ To properly compare AI models for debugging assistance, I would take Bug #1 (rev
 > "I have a Python function that compares a player's guess to a secret number. When the guess is greater than the secret, it says 'Too Low', but it should say 'Too High'. How would you fix this?"
 
 ### Expected Comparison Dimensions
-1. **Code Quality** - Which fix is most readable and maintainable?
-2. **Explanation Clarity** - Which model explains the *why* best?
-3. **Edge Case Awareness** - Do they mention testing or boundary cases?
-4. **Response Time** - How quickly do they provide solutions?
-5. **Follow-up Capability** - How well do they handle clarifying questions?
+1. Code Quality - Which fix is most readable and maintainable?
+2. Explanation Clarity - Which model explains the *why* best?
+3. Edge Case Awareness - Do they mention testing or boundary cases?
+4. Response Time - How quickly do they provide solutions?
+5. Follow-up Capability - How well do they handle clarifying questions?
 
 ### Observations from Copilot (What We Used)
 **Strengths:**
@@ -143,12 +143,12 @@ The project demonstrates that AI models are excellent *assistants* but require h
 
 ---
 
-## 💡 Tips for Filling This Out
+## Tips for Filling This Out
 
-- **Be specific:** Instead of "Copilot was helpful," say "Copilot explained that the if/else logic was reversed, which I verified by adding print statements."
-- **Be honest:** If Copilot gave bad advice, own it. It shows you were thinking critically.
-- **Reference code:** Point to specific lines or functions when explaining bugs (e.g., "In `logic_utils.py` line 42, the comparison is backwards").
-- **Show your work:** Describe how you tested each fix (e.g., "I ran pytest and saw the test pass" or "I played the game and confirmed the hint was correct").
+- Be specific: Instead of "Copilot was helpful," say "Copilot explained that the if/else logic was reversed, which I verified by adding print statements."
+- Be honest: If Copilot gave bad advice, own it. It shows you were thinking critically.
+- Reference code: Point to specific lines or functions when explaining bugs (e.g., "In `logic_utils.py` line 42, the comparison is backwards").
+- Show your work: Describe how you tested each fix (e.g., "I ran pytest and saw the test pass" or "I played the game and confirmed the hint was correct").
 
 ---
 
