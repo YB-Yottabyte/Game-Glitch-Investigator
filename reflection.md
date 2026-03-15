@@ -136,10 +136,10 @@ The project demonstrates that AI models are excellent *assistants* but require h
 > Without Copilot, I would probably spend more time staring at the code trying to figure out the backwards logic. Copilot's ability to explain the if/else reversal in plain English saved me from manual trace-through sessions. For the game-ending bug, I might have missed the UI component issue entirely and only fixed the flag-setting part. Copilot prompted me to think about the complete interaction, not just the data flow.
 
 #### If you had to trust ONLY what Copilot suggested (without testing), what could go wrong?
-> The button disabling example is perfect proof. Copilot's first response addressed the data flow (setting game_over flag) but didn't mention disabling the UI component. If I'd stopped there without running the game, players would still be able to break the 10-guess rule. Testing my fixes with unit tests and actually playing the game caught this partial solution before it became a real problem.
+> The button disabling example is perfect proof. Copilot's first response addressed the data flow like setting game_over flag but didn't mention disabling the UI component. If I'd stopped there without running the game, players would still be able to break the 10-guess rule. Testing my fixes with unit tests and actually playing the game caught this partial solution before it became a real problem.
 
 #### How confident are you in your final code? Why?
-> Very confident! Every fix has unit tests that pass, and I manually played the game to verify the hints, game-ending, and scoring work correctly. The code is also well-commented, explaining what each fix does and why. Additionally, the test suite covers edge cases (boundary values, perfect games, exhausted guesses) which gives me confidence that future changes won't break these fixes.
+> Very confident! Every fix has unit tests that pass, and I manually played the game to verify the hints, game-ending, and scoring work correctly. The code is also well-commented, explaining what each fix does and why. Additionally, the test suite covers edge cases like boundary values, perfect games, exhausted guesses which gives me confidence that future changes won't break these fixes.
 
 ---
 
@@ -148,7 +148,7 @@ The project demonstrates that AI models are excellent *assistants* but require h
 - Be specific: Instead of "Copilot was helpful," say "Copilot explained that the if/else logic was reversed, which I verified by adding print statements."
 - Be honest: If Copilot gave bad advice, own it. It shows you were thinking critically.
 - Reference code: Point to specific lines or functions when explaining bugs (e.g., "In `logic_utils.py` line 42, the comparison is backwards").
-- Show your work: Describe how you tested each fix (e.g., "I ran pytest and saw the test pass" or "I played the game and confirmed the hint was correct").
+- Show your work: Describe how you tested each fix.
 
 ---
 
