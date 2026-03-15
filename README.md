@@ -87,19 +87,19 @@ I trusted Copilot when it explained the logic reversal in check*guess() because 
 
 ### What skill improved the most?
 
-**Test-driven thinking.** At first, I fixed a bug and thought I was done. But writing unit tests forced me to be precise about what "working" means. When the score calculation had an edge case (score going negative), the test suite caught it. Now I instinctively ask: "What tests would prove this is fixed?"
+Test-driven thinking. At first, I fixed a bug and thought I was done. But writing unit tests forced me to be precise about what "working" means. When the score calculation had an edge case (score going negative), the test suite caught it. Now I instinctively ask: "What tests would prove this is fixed?"
 
 ## Project Structure
 
 ```
 game-glitch-investigator/
-├── README.md                 (this file)
-├── reflection.md             (your debugging journal)
-├── requirements.txt          (Python dependencies)
-├── app.py                    (Streamlit UI + game loop)
-├── logic_utils.py           (game logic with bugs)
+├── README.md 
+├── reflection.md   
+├── requirements.txt        
+├── app.py                   
+├── logic_utils.py         
 └── test/
-    └── test_game_logic.py   (pytest cases)
+    └── test_game_logic.py  
 ```
 
 ## Files Overview
@@ -107,24 +107,24 @@ game-glitch-investigator/
 | File                      | Purpose                                         |
 | ------------------------- | ----------------------------------------------- |
 | `app.py`                  | Streamlit interface and main game loop          |
-| `logic_utils.py`          | Core game logic (parse, check, start functions) |
+| `logic_utils.py`          | Core game logic                                 |
 | `test/test_game_logic.py` | Unit tests for logic_utils.py                   |
 | `reflection.md`           | Your debugging notes and AI collaboration log   |
 
 ## Debugging Workflow
 
-1. **Phase 1: Glitch Hunt** (~45 mins)
+1. **Phase 1: Glitch Hunt**
    - Play the game and identify bugs
    - Document what you observe vs. what you expected
    - Ask Copilot to explain the buggy logic
 
-2. **Phase 2: Investigate & Repair** (~60 mins)
+2. **Phase 2: Investigate & Repair**
    - Mark bugs with `# FIXME:` comments
    - Use Copilot Chat to fix each bug
    - Write pytest tests to verify fixes
    - Add `# FIX:` comments explaining your AI collaboration
 
-3. **Phase 3: Reflection & Documentation** (~30 mins)
+3. **Phase 3: Reflection & Documentation**
    - Complete this README
    - Write up your reflection in `reflection.md`
    - Commit and push all changes
@@ -197,7 +197,7 @@ See [reflection.md](reflection.md#challenge-5-ai-model-comparison) for full comp
 
 ---
 
-## 🎓 Project Summary
+## Project Summary
 
 **Challenges Completed:** All 5 Optional Challenges
 
@@ -207,8 +207,6 @@ See [reflection.md](reflection.md#challenge-5-ai-model-comparison) for full comp
 - Challenge 4: Hot/Cold indicators, color-coded feedback, summary tables
 - Challenge 5: AI model comparison methodology
 
-**Code Quality:** 26 unit tests, all passing ✓
-**Documentation:** Professional docstrings, comprehensive reflection, git history
 **Features:** High scores, game statistics, proximity indicators, data visualization
 
 **Git Commit History:**
