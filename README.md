@@ -83,7 +83,7 @@ What surprised me about debugging AI-generated code was that the problems werenâ
 
 ### When did you trust the AI's suggestions? When did you doubt them?
 
-I trusted Copilot when it explained the logic reversal in check*guess() because the explanation was precise and testable. I doubted it when it suggested just setting `game_over = True` without addressing the UI component (the button state). This made me realize: \_AI explains code well, but you still need to think about the complete system.*
+I trusted Copilot when it explained the logic reversal in checkguess() because the explanation was precise and testable. I doubted it when it suggested just setting `game_over = True` without addressing the UI component. This made me realize: \_AI explains code well, but you still need to think about the complete system.
 
 ### What skill improved the most?
 
