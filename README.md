@@ -79,7 +79,7 @@ pytest test/ -v
 
 ### What surprised you about debugging AI-generated code?
 
-Finding bugs required understanding not just the individual functions in isolation, but how they interacted with the Streamlit UI framework. The backwards hint logic was straightforward to spot and fix, but the game-ending bug taught me that AI-generated code often mixes concerns — UI and logic aren't cleanly separated, which creates unexpected bugs.
+What surprised me about debugging AI-generated code was that the problems weren’t just in individual functions, but in how the code interacted with the Streamlit UI. While one bug was easy to fix, another showed that the AI mixed UI and game logic together, which made debugging more complicated.
 
 ### When did you trust the AI's suggestions? When did you doubt them?
 
