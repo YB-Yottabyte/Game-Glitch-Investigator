@@ -42,6 +42,52 @@ class TestParseGuess:
         """Non-numeric input."""
         result = parse_guess("abc")
         assert result is None
+    
+    # Challenge 1: Edge-case tests for robustness
+    def test_negative_number(self):
+        """Negative numbers should be rejected."""
+        result = parse_guess("-50")
+        assert result is None
+    
+    def test_decimal_number(self):
+        """Decimal/float inputs should be rejected."""
+        result = parse_guess("50.5")
+        assert result is None
+    
+    def test_extremely_large_value(self):
+        """Extremely large numbers (1000000) should be rejected."""
+        result = parse_guess("1000000")
+        assert result is None
+    
+    def test_whitespace_handling(self):
+        """Input with leading/trailing whitespace should be accepted."""
+        result = parse_guess("  50  ")
+        assert result == 50
+    
+    def test_empty_string(self):
+        """Empty string input should be rejected."""
+        result = parse_guess("")
+        assert result is None
+    
+    def test_boundary_minimum(self):
+        """Guess at minimum boundary (1) should be valid."""
+        result = parse_guess("1")
+        assert result == 1
+    
+    def test_boundary_maximum(self):
+        """Guess at maximum boundary (100) should be valid."""
+        result = parse_guess("100")
+        assert result == 100
+    
+    def test_special_characters(self):
+        """Special characters in input should be rejected."""
+        result = parse_guess("50@#$")
+        assert result is None
+    
+    def test_scientific_notation(self):
+        """Scientific notation should be rejected (e.g., 1e5)."""
+        result = parse_guess("1e5")
+        assert result is None
 
 
 class TestStartGame:

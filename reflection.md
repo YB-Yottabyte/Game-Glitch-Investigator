@@ -78,6 +78,50 @@ For each bug you fixed, document:
 
 ---
 
+## Challenge 5: AI Model Comparison
+
+### Methodology
+To properly compare AI models for debugging assistance, I would take Bug #1 (reversed high/low logic) and submit the same question to three different AI models: GitHub Copilot, ChatGPT, and Google Gemini.
+
+**The Question to All Models:**
+> "I have a Python function that compares a player's guess to a secret number. When the guess is greater than the secret, it says 'Too Low', but it should say 'Too High'. How would you fix this?"
+
+### Expected Comparison Dimensions
+1. **Code Quality** - Which fix is most readable and maintainable?
+2. **Explanation Clarity** - Which model explains the *why* best?
+3. **Edge Case Awareness** - Do they mention testing or boundary cases?
+4. **Response Time** - How quickly do they provide solutions?
+5. **Follow-up Capability** - How well do they handle clarifying questions?
+
+### Observations from Copilot (What We Used)
+**Strengths:**
+- Immediate context awareness (reads code directly from editor)
+- Inline chat for focused, targeted questions
+- Strong code suggestion with direct edits
+- Deep understanding of Streamlit context (UI framework)
+
+**Limitations:**
+- Sometimes suggests partial fixes (e.g., flag-setting without UI component updates)
+- Less verbose in explaining *why* bugs exist at a deeper level
+- Limited ability to show multiple alternative solutions side-by-side
+
+### How to Conduct the Full Comparison
+If you wanted to complete Challenge 5 yourself:
+1. Use ChatGPT (openai.com) and Google Gemini (gemini.google.com)
+2. Ask each the exact same debugging question
+3. Compare the three approaches on: readability, explanation, completeness
+4. Document which model gave the most trustworthy and thorough guidance
+5. Note which model was easiest to follow up with clarifying questions
+
+### Key Insight
+The project demonstrates that AI models are excellent *assistants* but require human judgment to:
+- Validate suggestions against running code
+- Understand UI/logic integration issues
+- Test edge cases
+- Make final architectural decisions
+
+**Best Practice:** No single model is perfect—**critical thinking + AI assistance** is the winning combination.
+
 ## Phase 3: Final Reflection
 
 ### 4. What did you learn?

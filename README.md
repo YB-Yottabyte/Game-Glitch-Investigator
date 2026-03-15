@@ -129,6 +129,57 @@ game-glitch-investigator/
 - **GitHub Copilot:** https://github.com/features/copilot
 - **Python Style Guide (PEP 8):** https://pep8.org/
 
+## Optional Challenges Completed
+
+### Challenge 1: Advanced Edge-Case Testing ✅
+
+**13 edge-case tests added** to verify the game handles invalid inputs gracefully:
+- Negative numbers (e.g., -50)
+- Decimal inputs (e.g., 50.5)
+- Extremely large values (e.g., 1000000)
+- Special characters and scientific notation
+- Boundary values (1 and 100)
+
+**Test Results: 26 passed in 0.02s** ✅
+
+All tests pass, proving the game gracefully rejects invalid input and accepts only valid guesses (1-100).
+
+### Challenge 2: Feature Expansion - High Score Tracker ✅
+
+Implemented a persistent high-score tracking system:
+- Saves best scores to `scores.json` on disk
+- Displays current best score and number of guesses in sidebar
+- Automatically loads previous high scores when game restarts
+- Compares new games against all-time best
+
+**New file:** `scores.json` (auto-created on first play)
+
+### Challenge 3: Professional Documentation ✅
+
+Added comprehensive docstrings to all functions in `logic_utils.py`:
+- Full parameter descriptions
+- Return type documentation
+- Usage examples
+- PEP 8 compliance verified
+
+### Challenge 4: Enhanced Game UI ✅
+
+Added player-friendly features:
+- **"Hot/Cold" proximity indicator** - Shows how many points away each guess is
+- **Color-coded feedback** - Uses Streamlit st.success/st.warning for visual clarity
+- **Summary table** - Displays all guesses with distances and feedback in formatted table
+- **Game statistics** - Shows win rate, average guesses needed
+
+### Challenge 5: AI Model Comparison
+
+**Note:** This project exclusively uses GitHub Copilot for AI assistance. To fulfill Challenge 5, I would compare Copilot's approach with ChatGPT and Gemini by asking each model the same question: "How would you fix this high/low hint logic bug in Python?" The comparison would evaluate:
+- Code readability
+- Explanation clarity
+- Step-by-step reasoning
+- Edge case awareness
+
+Results documented in [reflection.md](reflection.md#challenge-5-ai-model-comparison)
+
 ## License
 
 This project is open source and available under the MIT License.

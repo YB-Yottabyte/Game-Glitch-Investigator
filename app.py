@@ -3,13 +3,14 @@ Number Guessing Game - Built with Streamlit
 
 A simple game where players guess a number between 1-100.
 The game provides hints and tracks the number of guesses.
+Features persistent high-score tracking (Challenge 2).
 
 NOTE: This code intentionally mixes UI logic with game logic 
 and contains bugs for you to find and fix!
 """
 
 import streamlit as st
-from logic_utils import parse_guess, check_guess, start_game
+from logic_utils import parse_guess, check_guess, start_game, load_high_scores, save_high_score, get_best_score
 
 
 def main():
@@ -17,6 +18,21 @@ def main():
     
     st.title("🎮 Number Guessing Game")
     st.write("I'm thinking of a number between 1 and 100. Can you guess it?")
+    
+    # Challenge 2: Display high scores in sidebar
+    st.sidebar.title("🏆 High Scores")
+    best_score = get_best_score()
+    if best_score:
+        st.sidebar.success(f"Best Score: **{best_score['score']}** (in {best_score['guesses']} guesses)")
+    else:
+        st.sidebar.info("No scores yet. Be the first to play!")
+    
+    # Display top 10 scores
+    scores = load_high_scores()
+    if scores:
+        st.sidebar.write("### Top Scores")
+        for i, score_entry in enumerate(scores[:10], 1):
+            st.sidebar.write(f"{i}. Score: {score_entry['score']} ({score_entry['guesses']} guesses)")
     
     # Initialize session state
     if 'game' not in st.session_state:
@@ -72,8 +88,47 @@ def main():
                         score = 100 - (game['guesses_made'] * 10) - (hints_received * 5)
                         score = max(0, score)  # Ensure score doesn't go negative
                         st.write(f"**Your Score:** {score}")
+                        
+                        # Challenge 2: Save the high score to persistent storage
+                        save_high_score(score, game['guesses_made'])
+                        st.success(f"✨ Score saved! Check the sidebar for high scores.")
+                        
+                        # Challenge 4: Display game statistics and summary table
+                        st.write("### 📊 Game Statistics")
+                        col1, col2, col3 = st.columns(3)
+                        with col1:
+                            st.metric("Guesses Used", game['guesses_made'])
+                        with col2:
+                            st.metric("Hints Received", hints_received)
+                        with col3:
+                            accuracy = (1 - (hints_received / max(1, game['guesses_made']))) * 100
+                            st.metric("Accuracy", f"{accuracy:.0f}%")
+                        
+                        # Challenge 4: Summary table of all guesses
+                        st.write("### 📋 Guess Summary")
+                        guess_data = []
+                        for idx, (g, f) in enumerate(st.session_state.feedback_history, 1):
+                            distance = abs(g - game['secret'])
+                            guess_data.append({
+                                "Guess #": idx,
+                                "Number": g,
+                                "Feedback": f,
+                                "Distance": distance if f != "Correct!" else 0
+                            })
+                        
+                        import pandas as pd
+                        df = pd.DataFrame(guess_data)
+                        st.dataframe(df, use_container_width=True)
                     else:
-                        st.info(f"Hint: {feedback}")
+                        # Challenge 4: Enhanced feedback with hot/cold indicator
+                        distance = abs(guess - game['secret'])
+                        
+                        if distance <= 5:
+                            st.error(f"🔥 {feedback} (HOT! Only {distance} away!)")
+                        elif distance <= 10:
+                            st.warning(f"🌡️ {feedback} (WARM - {distance} away)")
+                        else:
+                            st.info(f"❄️ {feedback} (COLD - {distance} away)")
                         
                         # FIX #2: Properly check if max guesses reached after this guess
                         if game['guesses_made'] >= game['max_guesses']:
