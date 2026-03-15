@@ -6,11 +6,11 @@ A Python guessing game built with Streamlit that contains intentional bugs for y
 
 Learn to debug AI-generated code responsibly by:
 
-1. **Finding bugs** by playing the game and observing unexpected behavior
-2. **Explaining bugs** using Copilot to understand the underlying logic flaws
-3. **Fixing bugs** with AI assistance while maintaining code quality
-4. **Testing fixes** with automated pytest cases
-5. **Documenting the process** to show how you collaborated with AI
+1. Finding bugs by playing the game and observing unexpected behavior
+2. Explaining bugs using Copilot to understand the underlying logic flaws
+3. Fixing bugs with AI assistance while maintaining code quality
+4. Testing fixes with automated pytest cases
+5. Documenting the process to show how you collaborated with AI
 
 ## Quick Start
 
@@ -150,7 +150,7 @@ game-glitch-investigator/
 
 **Test Results: 26 passed in 0.04s**
 
-All tests pass, proving the game gracefully rejects invalid input and accepts only valid guesses (1-100).
+All tests pass, proving the game gracefully rejects invalid input and accepts only valid guesses (1-100):
 
 ![Test Results](assets/test%20screenshot.png)
 
