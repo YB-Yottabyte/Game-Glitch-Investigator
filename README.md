@@ -62,9 +62,9 @@ pytest test/ -v
 4. Click "Reset Game" to play again
 
 **What you'll notice (bugs are intentional!):**
-- 🐛 Bug 1: High/Low hints are backwards — says "Too Low" when you guess too high
-- 🐛 Bug 2: The game never ends — you can keep guessing past 10 attempts
-- 🐛 Bug 3: Score calculation is wrong — only counts guesses, not hints received
+- Bug 1: High/Low hints are backwards — says "Too Low" when you guess too high
+- Bug 2: The game never ends — you can keep guessing past 10 attempts
+- Bug 3: Score calculation is wrong — only counts guesses, not hints received
 
 ## Document Your Experience
 
