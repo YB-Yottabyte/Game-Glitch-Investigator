@@ -69,9 +69,9 @@ pytest test/ -v
 
 **What you'll notice (bugs are intentional!):**
 
-- 🐛 Bug 1: High/Low hints are backwards — says "Too Low" when you guess too high
-- 🐛 Bug 2: The game never ends — you can keep guessing past 10 attempts
-- 🐛 Bug 3: Score calculation is wrong — only counts guesses, not hints received
+- Bug 1: High/Low hints are backwards — says "Too Low" when you guess too high
+- Bug 2: The game never ends — you can keep guessing past 10 attempts
+- Bug 3: Score calculation is wrong — only counts guesses, not hints received
 
 ## Document Your Experience
 
@@ -83,7 +83,7 @@ Finding bugs required understanding not just the individual functions in isolati
 
 ### When did you trust the AI's suggestions? When did you doubt them?
 
-I trusted Copilot when it explained the logic reversal in check_guess() because the explanation was precise and testable. I doubted it when it suggested just setting `game_over = True` without addressing the UI component (the button state). This made me realize: _AI explains code well, but you still need to think about the complete system._
+I trusted Copilot when it explained the logic reversal in check*guess() because the explanation was precise and testable. I doubted it when it suggested just setting `game_over = True` without addressing the UI component (the button state). This made me realize: \_AI explains code well, but you still need to think about the complete system.*
 
 ### What skill improved the most?
 
@@ -138,23 +138,23 @@ game-glitch-investigator/
 
 ## Optional Challenges Completed
 
-### Challenge 1: Advanced Edge-Case Testing ✅
+### Challenge 1: Advanced Edge-Case Testing
 
 **13 edge-case tests added** to verify the game handles invalid inputs gracefully:
 
-- Negative numbers (e.g., -50)
-- Decimal inputs (e.g., 50.5)
-- Extremely large values (e.g., 1000000)
+- Negative numbers
+- Decimal inputs
+- Extremely large values
 - Special characters and scientific notation
-- Boundary values (1 and 100)
+- Boundary values
 
-**Test Results: 26 passed in 0.02s** ✅
+**Test Results: 26 passed in 0.04s**
 
 All tests pass, proving the game gracefully rejects invalid input and accepts only valid guesses (1-100).
 
 ![Test Results](assets/test%20screenshot.png)
 
-### Challenge 2: Feature Expansion - High Score Tracker ✅
+### Challenge 2: Feature Expansion - High Score Tracker
 
 Implemented a persistent high-score tracking system:
 
@@ -165,7 +165,7 @@ Implemented a persistent high-score tracking system:
 
 **New file:** `scores.json` (auto-created on first play)
 
-### Challenge 3: Professional Documentation ✅
+### Challenge 3: Professional Documentation
 
 Added comprehensive docstrings to all functions in `logic_utils.py`:
 
@@ -174,7 +174,7 @@ Added comprehensive docstrings to all functions in `logic_utils.py`:
 - Usage examples
 - PEP 8 compliance verified
 
-### Challenge 4: Enhanced Game UI ✅
+### Challenge 4: Enhanced Game UI
 
 Added player-friendly features:
 
@@ -183,7 +183,7 @@ Added player-friendly features:
 - **Summary table** - Displays all guesses with distances and feedback in formatted table
 - **Game statistics** - Shows win rate, average guesses needed
 
-### Challenge 5: AI Model Comparison ✅
+### Challenge 5: AI Model Comparison
 
 **Documented methodology** for comparing AI models on bug-fixing:
 
@@ -199,7 +199,7 @@ See [reflection.md](reflection.md#challenge-5-ai-model-comparison) for full comp
 
 ## 🎓 Project Summary
 
-**Challenges Completed:** All 5 Optional Challenges ✅
+**Challenges Completed:** All 5 Optional Challenges
 
 - Challenge 1: 26 comprehensive edge-case tests
 - Challenge 2: Persistent high-score tracker with JSON storage
