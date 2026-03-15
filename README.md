@@ -72,15 +72,15 @@ pytest test/ -v
 
 ### What surprised you about debugging AI-generated code?
 
-> Your answer here
+Finding bugs required understanding not just the individual functions in isolation, but how they interacted with the Streamlit UI framework. The backwards hint logic was straightforward to spot and fix, but the game-ending bug taught me that AI-generated code often mixes concerns — UI and logic aren't cleanly separated, which creates unexpected bugs.
 
 ### When did you trust the AI's suggestions? When did you doubt them?
 
-> Your answer here
+I trusted Copilot when it explained the logic reversal in check_guess() because the explanation was precise and testable. I doubted it when it suggested just setting `game_over = True` without addressing the UI component (the button state). This made me realize: *AI explains code well, but you still need to think about the complete system.*
 
 ### What skill improved the most?
 
-> Your answer here
+**Test-driven thinking.** At first, I fixed a bug and thought I was done. But writing unit tests forced me to be precise about what "working" means. When the score calculation had an edge case (score going negative), the test suite caught it. Now I instinctively ask: "What tests would prove this is fixed?"
 
 ## Project Structure
 
