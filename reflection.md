@@ -13,20 +13,20 @@ Document the three bugs you found. For each bug, describe:
 - **What actually happened**
 - **Where in the code you think the bug is**
 
-#### Bug #1: [Name/Description]
-- **Expected:** 
-- **Actual:** 
-- **Location (file and function):** 
+#### Bug #1: High/Low Hints Are Backwards
+- **Expected:** When my guess (60) is higher than the secret (50), I should see "Too High"
+- **Actual:** The game displays "Too Low" when I guess a number higher than the secret
+- **Location (file and function):** `logic_utils.py` in the `check_guess()` function, lines 40-48. The if/else logic for comparing guess > secret returns the wrong message
 
-#### Bug #2: [Name/Description]
-- **Expected:** 
-- **Actual:** 
-- **Location (file and function):** 
+#### Bug #2: Game Doesn't Enforce Max Guesses
+- **Expected:** After 10 guesses, the game should stop accepting new guesses and show "Game Over"
+- **Actual:** I can keep guessing past 10 guesses. The "Guesses Remaining" counter goes negative, and the game still accepts input
+- **Location (file and function):** `app.py` in the `main()` function. The check `if game['guesses_made'] >= game['max_guesses']` exists but doesn't properly prevent further input submission
 
-#### Bug #3: [Name/Description]
-- **Expected:** 
-- **Actual:** 
-- **Location (file and function):** 
+#### Bug #3: Score Calculation Ignores Hints
+- **Expected:** My score should decrease for EACH HINT I receive, not just for each guess. Getting hints quickly should be rewarded
+- **Actual:** Score = 100 - (guesses_made * 10). The calculation only counts guesses, so the score doesn't reflect how many hints I needed before guessing correctly
+- **Location (file and function):** `app.py` in the `main()` function, around line 50. The score formula doesn't track the number of hints given 
 
 ---
 
