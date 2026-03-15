@@ -5,6 +5,7 @@ A Python guessing game built with Streamlit that contains intentional bugs for y
 ## Project Goal
 
 Learn to debug AI-generated code responsibly by:
+
 1. **Finding bugs** by playing the game and observing unexpected behavior
 2. **Explaining bugs** using Copilot to understand the underlying logic flaws
 3. **Fixing bugs** with AI assistance while maintaining code quality
@@ -14,18 +15,21 @@ Learn to debug AI-generated code responsibly by:
 ## Quick Start
 
 ### Prerequisites
+
 - Python 3.8 or higher
 - pip (Python package manager)
 
 ### Installation
 
 1. Clone this repository:
+
 ```bash
 git clone https://github.com/YOUR_USERNAME/Game-Glitch-Investigator.git
 cd Game-Glitch-Investigator
 ```
 
 2. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -53,18 +57,21 @@ pytest test/ -v
 
 ## Demo
 
-<!-- TODO: Update this section with your experience -->
-
 **How to play:**
+
 1. Open the app with `streamlit run app.py`
 2. Enter a number between 1 and 100 in the text box
 3. Click "Submit Guess" to see the hint
 4. Click "Reset Game" to play again
 
+**Fixed Game (Post-Repair):**
+![Web Screenshot](assets/web%20screenshot.png)
+
 **What you'll notice (bugs are intentional!):**
-- Bug 1: High/Low hints are backwards — says "Too Low" when you guess too high
-- Bug 2: The game never ends — you can keep guessing past 10 attempts
-- Bug 3: Score calculation is wrong — only counts guesses, not hints received
+
+- 🐛 Bug 1: High/Low hints are backwards — says "Too Low" when you guess too high
+- 🐛 Bug 2: The game never ends — you can keep guessing past 10 attempts
+- 🐛 Bug 3: Score calculation is wrong — only counts guesses, not hints received
 
 ## Document Your Experience
 
@@ -76,7 +83,7 @@ Finding bugs required understanding not just the individual functions in isolati
 
 ### When did you trust the AI's suggestions? When did you doubt them?
 
-I trusted Copilot when it explained the logic reversal in check_guess() because the explanation was precise and testable. I doubted it when it suggested just setting `game_over = True` without addressing the UI component (the button state). This made me realize: *AI explains code well, but you still need to think about the complete system.*
+I trusted Copilot when it explained the logic reversal in check_guess() because the explanation was precise and testable. I doubted it when it suggested just setting `game_over = True` without addressing the UI component (the button state). This made me realize: _AI explains code well, but you still need to think about the complete system._
 
 ### What skill improved the most?
 
@@ -97,12 +104,12 @@ game-glitch-investigator/
 
 ## Files Overview
 
-| File | Purpose |
-|------|---------|
-| `app.py` | Streamlit interface and main game loop |
-| `logic_utils.py` | Core game logic (parse, check, start functions) |
-| `test/test_game_logic.py` | Unit tests for logic_utils.py |
-| `reflection.md` | Your debugging notes and AI collaboration log |
+| File                      | Purpose                                         |
+| ------------------------- | ----------------------------------------------- |
+| `app.py`                  | Streamlit interface and main game loop          |
+| `logic_utils.py`          | Core game logic (parse, check, start functions) |
+| `test/test_game_logic.py` | Unit tests for logic_utils.py                   |
+| `reflection.md`           | Your debugging notes and AI collaboration log   |
 
 ## Debugging Workflow
 
@@ -134,6 +141,7 @@ game-glitch-investigator/
 ### Challenge 1: Advanced Edge-Case Testing ✅
 
 **13 edge-case tests added** to verify the game handles invalid inputs gracefully:
+
 - Negative numbers (e.g., -50)
 - Decimal inputs (e.g., 50.5)
 - Extremely large values (e.g., 1000000)
@@ -144,9 +152,12 @@ game-glitch-investigator/
 
 All tests pass, proving the game gracefully rejects invalid input and accepts only valid guesses (1-100).
 
+![Test Results](assets/test%20screenshot.png)
+
 ### Challenge 2: Feature Expansion - High Score Tracker ✅
 
 Implemented a persistent high-score tracking system:
+
 - Saves best scores to `scores.json` on disk
 - Displays current best score and number of guesses in sidebar
 - Automatically loads previous high scores when game restarts
@@ -157,6 +168,7 @@ Implemented a persistent high-score tracking system:
 ### Challenge 3: Professional Documentation ✅
 
 Added comprehensive docstrings to all functions in `logic_utils.py`:
+
 - Full parameter descriptions
 - Return type documentation
 - Usage examples
@@ -165,6 +177,7 @@ Added comprehensive docstrings to all functions in `logic_utils.py`:
 ### Challenge 4: Enhanced Game UI ✅
 
 Added player-friendly features:
+
 - **"Hot/Cold" proximity indicator** - Shows how many points away each guess is
 - **Color-coded feedback** - Uses Streamlit st.success/st.warning for visual clarity
 - **Summary table** - Displays all guesses with distances and feedback in formatted table
@@ -173,6 +186,7 @@ Added player-friendly features:
 ### Challenge 5: AI Model Comparison ✅
 
 **Documented methodology** for comparing AI models on bug-fixing:
+
 - Question template for consistent testing across models
 - 5 comparison dimensions: Code Quality, Explanation Clarity, Edge Case Awareness, Response Time, Follow-up Capability
 - Detailed observations from using GitHub Copilot
@@ -186,6 +200,7 @@ See [reflection.md](reflection.md#challenge-5-ai-model-comparison) for full comp
 ## 🎓 Project Summary
 
 **Challenges Completed:** All 5 Optional Challenges ✅
+
 - Challenge 1: 26 comprehensive edge-case tests
 - Challenge 2: Persistent high-score tracker with JSON storage
 - Challenge 3: Professional docstrings and PEP 8 compliance
@@ -195,6 +210,9 @@ See [reflection.md](reflection.md#challenge-5-ai-model-comparison) for full comp
 **Code Quality:** 26 unit tests, all passing ✓
 **Documentation:** Professional docstrings, comprehensive reflection, git history
 **Features:** High scores, game statistics, proximity indicators, data visualization
+
+**Git Commit History:**
+![Git Log](assets/git.png)
 
 ## License
 

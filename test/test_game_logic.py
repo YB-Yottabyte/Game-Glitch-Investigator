@@ -16,6 +16,10 @@ def test_check_guess_too_high():
     assert result == "Too High"
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import pytest
 from logic_utils import parse_guess, check_guess, start_game
 

@@ -20,7 +20,7 @@ def main():
     st.write("I'm thinking of a number between 1 and 100. Can you guess it?")
     
     # Challenge 2: Display high scores in sidebar
-    st.sidebar.title("🏆 High Scores")
+    st.sidebar.title("High Scores")
     best_score = get_best_score()
     if best_score:
         st.sidebar.success(f"Best Score: **{best_score['score']}** (in {best_score['guesses']} guesses)")

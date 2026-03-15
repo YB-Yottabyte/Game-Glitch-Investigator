@@ -173,4 +173,4 @@ git commit -m "docs: update reflection with debugging notes"
 git push origin main
 ```
 
-Good luck, and happy debugging! 🚀
+Good luck, and happy debugging!
