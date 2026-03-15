@@ -79,3 +79,74 @@ class TestStartGame:
 #
 # def test_check_guess_too_low():
 #     assert check_guess(40, 50) == "Too Low"
+
+
+class TestCheckGuess:
+    """Test the check_guess function after fix #1."""
+    
+    def test_check_guess_correct(self):
+        """User guesses the correct number."""
+        result = check_guess(50, 50)
+        assert result == "Correct!"
+    
+    def test_check_guess_too_high(self):
+        """User's guess is higher than secret."""
+        result = check_guess(60, 50)
+        assert result == "Too High"
+    
+    def test_check_guess_too_low(self):
+        """User's guess is lower than secret."""
+        result = check_guess(40, 50)
+        assert result == "Too Low"
+    
+    def test_check_guess_boundary_high(self):
+        """Test boundary: guess at upper end (100)."""
+        result = check_guess(100, 50)
+        assert result == "Too High"
+    
+    def test_check_guess_boundary_low(self):
+        """Test boundary: guess at lower end (1)."""
+        result = check_guess(1, 50)
+        assert result == "Too Low"
+
+
+class TestGameSession:
+    """Test game session mechanics."""
+    
+    def test_game_starts_at_zero_guesses(self):
+        """New game should start with 0 guesses."""
+        game = start_game()
+        assert game['guesses_made'] == 0
+    
+    def test_game_has_max_of_10_guesses(self):
+        """Game should allow maximum 10 guesses."""
+        game = start_game()
+        assert game['max_guesses'] == 10
+
+
+class TestScoreCalculation:
+    """Test score calculation mechanics (FIX #3)."""
+    
+    def test_score_perfect_game(self):
+        """Perfect game: 1 guess, no hints."""
+        # Score = 100 - (1 * 10) - (0 * 5) = 90
+        guesses_made = 1
+        hints_received = 0
+        score = 100 - (guesses_made * 10) - (hints_received * 5)
+        assert score == 90
+    
+    def test_score_with_hints(self):
+        """Game with hints: 5 guesses, 4 hints."""
+        # Score = 100 - (5 * 10) - (4 * 5) = 100 - 50 - 20 = 30
+        guesses_made = 5
+        hints_received = 4
+        score = 100 - (guesses_made * 10) - (hints_received * 5)
+        assert score == 30
+    
+    def test_score_many_guesses(self):
+        """Game with many guesses: 10 guesses, 9 hints."""
+        # Score = 100 - (10 * 10) - (9 * 5) = 100 - 100 - 45 = -45, but clamped to 0
+        guesses_made = 10
+        hints_received = 9
+        score = max(0, 100 - (guesses_made * 10) - (hints_received * 5))
+        assert score == 0

@@ -35,39 +35,50 @@ def main():
     # Player input
     guess_input = st.text_input("Enter your guess:", key="guess_input")
     
-    if st.button("Submit Guess"):
-        # Parse the input
-        guess = parse_guess(guess_input)
-        
-        if guess is None:
-            st.error("Please enter a valid number between 1 and 100.")
+    # Disable input if game is over
+    submit_disabled = game['game_over']
+    
+    if st.button("Submit Guess", disabled=submit_disabled):
+        # FIX #2: Check if game is already over before processing new guesses
+        if game['game_over']:
+            st.warning("Game is over! Click 'Reset Game' to play again.")
         else:
-            # BUG #2: This increment doesn't actually work because 
-            # we check max guesses AFTER incrementing, but the game never truly stops
-            game['guesses_made'] += 1
+            # Parse the input
+            guess = parse_guess(guess_input)
             
-            # Get feedback from logic
-            feedback = check_guess(guess, game['secret'])
-            st.session_state.feedback_history.append((guess, feedback))
-            
-            # Display feedback
-            if feedback == "Correct!":
-                st.success(f"🎉 You got it! The number was {game['secret']}!")
-                st.balloons()
-                game['game_over'] = True
-                
-                # BUG #3: Score calculation is wrong!
-                # It only counts guesses, not hints given. Should count hints as penalties.
-                score = 100 - (game['guesses_made'] * 10)
-                st.write(f"**Your Score:** {score}")
+            if guess is None:
+                st.error("Please enter a valid number between 1 and 100.")
             else:
-                st.info(f"Hint: {feedback}")
-                
-                # BUG #2: This check doesn't properly end the game
-                # The condition is here but the game state doesn't fully stop
+                # FIX #2: Check max guesses BEFORE incrementing, not after
                 if game['guesses_made'] >= game['max_guesses']:
-                    st.error(f"Game Over! The secret number was {game['secret']}")
+                    st.error(f"Game Over! You've used all {game['max_guesses']} guesses. The secret number was {game['secret']}")
                     game['game_over'] = True
+                else:
+                    game['guesses_made'] += 1
+                    
+                    # Get feedback from logic
+                    feedback = check_guess(guess, game['secret'])
+                    st.session_state.feedback_history.append((guess, feedback))
+                    
+                    # Display feedback
+                    if feedback == "Correct!":
+                        st.success(f"🎉 You got it! The number was {game['secret']}!")
+                        st.balloons()
+                        game['game_over'] = True
+                        
+                        # FIX #3: Score calculation now accounts for hints received
+                        # Each hint counts as a -5 point penalty, each guess as -10 points
+                        hints_received = len(st.session_state.feedback_history) - 1  # Don't count "Correct!"
+                        score = 100 - (game['guesses_made'] * 10) - (hints_received * 5)
+                        score = max(0, score)  # Ensure score doesn't go negative
+                        st.write(f"**Your Score:** {score}")
+                    else:
+                        st.info(f"Hint: {feedback}")
+                        
+                        # FIX #2: Properly check if max guesses reached after this guess
+                        if game['guesses_made'] >= game['max_guesses']:
+                            st.error(f"Game Over! You've used all {game['max_guesses']} guesses. The secret number was {game['secret']}")
+                            game['game_over'] = True
     
     # Display feedback history
     if st.session_state.feedback_history:

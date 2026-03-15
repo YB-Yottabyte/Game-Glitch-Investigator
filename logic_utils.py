@@ -40,18 +40,15 @@ def check_guess(guess, secret):
         
     Returns:
         str: Feedback message ("Correct!", "Too High", or "Too Low")
-        
-    NOTE: BUG #1 - The logic here is backwards!
-    When guess > secret, it should say "Too High" but it says "Too Low"
     """
     if guess == secret:
         return "Correct!"
     elif guess > secret:
-        # BUG #1: This is backwards - should return "Too High"
-        return "Too Low"
-    else:
-        # BUG #1: This is backwards - should return "Too Low"
+        # FIX #1: Corrected reversed logic - now correctly returns "Too High" when guess is greater
         return "Too High"
+    else:
+        # FIX #1: Corrected reversed logic - now correctly returns "Too Low" when guess is less
+        return "Too Low"
 
 
 def start_game():
